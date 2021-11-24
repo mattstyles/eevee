@@ -1,0 +1,23 @@
+{
+  "name": "@eevee/app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prebuild": "rimraf lib",
+    "build": "rimraf lib && spack",
+    "watch": "spack -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@swc/cli": "^0.1.51",
+    "@swc/core": "^1.2.111",
+    "chokidar": "^3.5.2",
+    "rimraf": "^3.0.2"
+  },
+  "dependencies": {
+    "@eevee/core": "workspace:^1.0.0"
+  }
+}

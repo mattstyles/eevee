@@ -1,0 +1,21 @@
+{
+  "name": "@eevee/dispatcher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "swc src/index.ts -d lib",
+    "watch": "swc -w src/index.ts -d lib",
+    "types": "tsc src/index.ts -d --emitDeclarationOnly --outDir lib",
+    "types:watch": "tsc -2 src/index.ts -d --emitDeclarationOnly --outDir lib",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@swc/cli": "^0.1.51",
+    "@swc/core": "^1.2.111",
+    "chokidar": "^3.5.2",
+    "typescript": "^4.5.2"
+  }
+}
