@@ -1,17 +1,19 @@
 {
   "name": "@eevee/dispatcher",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.0",
+  "description": "Dispatch system for eevee ECS",
   "main": "index.js",
   "scripts": {
     "build": "swc src/index.ts -d lib",
-    "watch": "swc -w src/index.ts -d lib",
+    "build:watch": "swc -w src/index.ts -d lib",
     "types": "tsc src/index.ts -d --emitDeclarationOnly --outDir lib",
-    "types:watch": "tsc -2 src/index.ts -d --emitDeclarationOnly --outDir lib",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "types:watch": "tsc -w src/index.ts -d --emitDeclarationOnly --outDir lib",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "watch": "concurrently --kill-others \"pnpm run build:watch\" \"pnpm run types:watch\" \"pnpm run test:watch\""
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Matt Styles",
+  "license": "MIT",
   "devDependencies": {
     "@swc/cli": "^0.1.51",
     "@swc/core": "^1.2.111",

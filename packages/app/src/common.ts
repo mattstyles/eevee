@@ -1,1 +1,1 @@
-export const id: string = "[@eevee/app]";
+export const id: string = '[@eevee/app]'

@@ -1,7 +1,7 @@
 {
   "name": "@eevee/core",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.0",
+  "description": "Eevee ECS core module",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
@@ -10,11 +10,11 @@
     "types": "tsc src/index.ts -d --emitDeclarationOnly --outDir lib",
     "types:watch": "tsc -w src/index.ts -d --emitDeclarationOnly --outDir lib",
     "test": "jest",
-    "test:watch": "jest --watchAll",
+    "test:watch": "jest --watch",
     "watch": "concurrently --kill-others \"pnpm run build:watch\" \"pnpm run types:watch\" \"pnpm run test:watch\""
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Matt Styles",
+  "license": "MIT",
   "devDependencies": {
     "@swc/cli": "^0.1.51",
     "@swc/core": "^1.2.111",
