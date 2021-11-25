@@ -28,7 +28,11 @@ importers:
       '@types/jest': ^27.0.3
       concurrently: ^6.4.0
       jest: ^27.3.1
+      rimraf: ^3.0.2
       typescript: ^4.5.2
+      uuid: ^8.3.2
+    dependencies:
+      uuid: 8.3.2
     devDependencies:
       '@swc/cli': 0.1.51_@swc+core@1.2.111
       '@swc/core': 1.2.111
@@ -36,6 +40,7 @@ importers:
       '@types/jest': 27.0.3
       concurrently: 6.4.0
       jest: 27.3.1
+      rimraf: 3.0.2
       typescript: 4.5.2
 
   packages/dispatcher:
@@ -5051,6 +5056,11 @@ packages:
       is-typed-array: 1.1.8
       safe-buffer: 5.2.1
       which-typed-array: 1.1.7
+    dev: false
+
+  /uuid/8.3.2:
+    resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    hasBin: true
     dev: false
 
   /v8-compile-cache/2.3.0:
