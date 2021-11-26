@@ -2,12 +2,7 @@ import {World, Component} from './world'
 
 class ITestComponent extends Component {
   id = 'TestComponent'
-  data: string = ''
-
-  constructor(data: string) {
-    super()
-    this.data = data
-  }
+  data: {str: string}
 
   onAdd(): void {}
   onRemove(): void {}
@@ -15,12 +10,7 @@ class ITestComponent extends Component {
 
 class ITestComponent2 extends Component {
   id = 'TestComponent2'
-  data: number = 0
-
-  constructor(data: number) {
-    super()
-    this.data = data
-  }
+  data: {num: number}
 
   onAdd(): void {}
   onRemove(): void {}
@@ -55,8 +45,8 @@ it('World can apply components to entities and set the bitmask correctly', () =>
   world.register(ITestComponent)
   world.register(ITestComponent2)
 
-  world.applyComponent(new ITestComponent('hello'), entity)
-  world.applyComponent(new ITestComponent2(42), entity)
+  world.applyComponent(new ITestComponent({str: 'yo'}), entity)
+  world.applyComponent(new ITestComponent2({num: 42}), entity)
 
   let entityMask = world.entities.get(entity)
   expect((entityMask & 1) > 0).toBe(true)
@@ -74,15 +64,15 @@ it('World can be queried for entities that contain a component', () => {
   world.register(ITestComponent)
   world.register(ITestComponent2)
 
-  world.applyComponent(new ITestComponent(testString), entity)
-  world.applyComponent(new ITestComponent2(testNumber), entity)
+  world.applyComponent(new ITestComponent({str: testString}), entity)
+  world.applyComponent(new ITestComponent2({num: testNumber}), entity)
 
   const entities = world.queryOne<ITestComponent>(ITestComponent)
 
   let count = 0
-  for (let [id, [data]] of entities) {
+  for (let [id, [{str}]] of entities) {
     count = count + 1
-    expect(data).toBe(testString)
+    expect(str).toBe(testString)
     expect(id).toBe(entity)
   }
   expect(count).toBe(1)
@@ -97,8 +87,8 @@ it('World can be queried for entities that match the component set', () => {
   world.register(ITestComponent)
   world.register(ITestComponent2)
 
-  world.applyComponent(new ITestComponent(testString), entity)
-  world.applyComponent(new ITestComponent2(testNumber), entity)
+  world.applyComponent(new ITestComponent({str: testString}), entity)
+  world.applyComponent(new ITestComponent2({num: testNumber}), entity)
 
   const entities = world.query<ITestComponent, ITestComponent2>(
     ITestComponent,
@@ -106,7 +96,7 @@ it('World can be queried for entities that match the component set', () => {
   )
 
   let count = 0
-  for (let [id, [str, num]] of entities) {
+  for (let [id, [{str}, {num}]] of entities) {
     count = count + 1
     expect(str).toBe(testString)
     expect(num).toBe(testNumber)

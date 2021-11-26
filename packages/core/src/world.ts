@@ -4,14 +4,12 @@ type ID = string
 
 export class Component {
   id: ID
-  data: any
+  data: any = {}
   onAdd(): void {}
   onRemove(): void {}
 
-  constructor(attributes: any = {}) {
-    for (let key in attributes) {
-      this[key] = attributes[key]
-    }
+  constructor(attributes: object = {}) {
+    this.data = attributes
   }
 }
 
@@ -22,15 +20,15 @@ type TableData = {
   mask: number
 }
 
-type QueryType = <
-  T extends Component = Component,
-  T1 extends Component = Component,
-  T2 extends Component = Component
->(
-  arg0?: typeof Component,
-  arg1?: typeof Component,
-  arg2?: typeof Component
-) => Map<ID, [T?, T1?, T2?]>
+// type QueryType = <
+//   T extends Component = Component,
+//   T1 extends Component = Component,
+//   T2 extends Component = Component
+// >(
+//   arg0?: typeof Component,
+//   arg1?: typeof Component,
+//   arg2?: typeof Component
+// ) => Map<ID, [T?, T1?, T2?]>
 
 export class World {
   // Entities with a bitmask for their contained components
@@ -95,7 +93,7 @@ export class World {
     const table = this.tables.get(component.name)
     const components = new Map<ID, [T['data']]>()
     table.entities.forEach((component, key) => {
-      components.set(key, [component.data as T])
+      components.set(key, [component.data as T['data']])
     })
     return components
   }
@@ -132,7 +130,8 @@ export class World {
     }
 
     // Structure the output
-    let output = new Map<ID, [T['data']?, T1['data']?, T2['data']?]>()
+    // let output = new Map<ID, [T['data']?, T1['data']?, T2['data']?]>()
+    let output = new Map()
     let index = 0
     for (let arg of args) {
       let table = this.tables.get(arg.name)
