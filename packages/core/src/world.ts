@@ -20,16 +20,6 @@ type TableData = {
   mask: number
 }
 
-// type QueryType = <
-//   T extends Component = Component,
-//   T1 extends Component = Component,
-//   T2 extends Component = Component
-// >(
-//   arg0?: typeof Component,
-//   arg1?: typeof Component,
-//   arg2?: typeof Component
-// ) => Map<ID, [T?, T1?, T2?]>
-
 export class World {
   // Entities with a bitmask for their contained components
   entities: Map<ID, number> = new Map()
@@ -103,12 +93,37 @@ export class World {
    * @TODO cache the result
    */
   query<
-    T extends Component = Component,
-    T1 extends Component = Component,
-    T2 extends Component = Component
+    A extends Component = Component,
+    B extends Component = Component,
+    C extends Component = Component,
+    D extends Component = Component,
+    E extends Component = Component,
+    F extends Component = Component,
+    G extends Component = Component,
+    H extends Component = Component,
+    I extends Component = Component,
+    J extends Component = Component,
+    K extends Component = Component,
+    L extends Component = Component
   >(
     ...args: typeof Component[]
-  ): Map<ID, [T['data']?, T1['data']?, T2['data']?]> {
+  ): Map<
+    ID,
+    [
+      A['data']?,
+      B['data']?,
+      C['data']?,
+      D['data']?,
+      E['data']?,
+      F['data']?,
+      G['data']?,
+      H['data']?,
+      I['data']?,
+      J['data']?,
+      K['data']?,
+      L['data']?
+    ]
+  > {
     // Generate a bitmask from the supplied component types
     const allMasks = []
     for (let arg of args) {
@@ -130,7 +145,6 @@ export class World {
     }
 
     // Structure the output
-    // let output = new Map<ID, [T['data']?, T1['data']?, T2['data']?]>()
     let output = new Map()
     let index = 0
     for (let arg of args) {
