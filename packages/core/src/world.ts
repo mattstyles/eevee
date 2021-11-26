@@ -22,6 +22,16 @@ type TableData = {
   mask: number
 }
 
+type QueryType = <
+  T extends Component = Component,
+  T1 extends Component = Component,
+  T2 extends Component = Component
+>(
+  arg0?: typeof Component,
+  arg1?: typeof Component,
+  arg2?: typeof Component
+) => Map<ID, [T?, T1?, T2?]>
+
 export class World {
   // Entities with a bitmask for their contained components
   entities: Map<ID, number> = new Map()
@@ -77,17 +87,69 @@ export class World {
   }
 
   /**
-   * Returns a set of components that have the supplied components
-   * @TODO for now just use one type parameter
+   * Returns data from entities who match the supplied component
    */
-  query<T extends Component>(
+  queryOne<T extends Component = Component>(
     component: typeof Component
-  ): Set<[T['data'], ID]> {
+  ): Map<ID, [T['data']]> {
     const table = this.tables.get(component.name)
-    const components = new Set<[T['data'], ID]>()
+    const components = new Map<ID, [T['data']]>()
     table.entities.forEach((component, key) => {
-      components.add([component.data as T, key])
+      components.set(key, [component.data as T])
     })
     return components
+  }
+
+  /**
+   * Returns data from entities who match the supplied components
+   * @TODO cache the result
+   */
+  query<
+    T extends Component = Component,
+    T1 extends Component = Component,
+    T2 extends Component = Component
+  >(
+    ...args: typeof Component[]
+  ): Map<ID, [T['data']?, T1['data']?, T2['data']?]> {
+    // Generate a bitmask from the supplied component types
+    const allMasks = []
+    for (let arg of args) {
+      let table = this.tables.get(arg.name)
+      if (table) {
+        allMasks.push(table.mask)
+      }
+    }
+    const mask = allMasks.reduce((masks, mask) => {
+      return masks | mask
+    }, 0)
+
+    // Iterate entities looking for those who match the mask
+    let entities = new Set<ID>()
+    for (let [entity, entityMask] of this.entities) {
+      if (entityMask & mask) {
+        entities.add(entity)
+      }
+    }
+
+    // Structure the output
+    let output = new Map<ID, [T['data']?, T1['data']?, T2['data']?]>()
+    let index = 0
+    for (let arg of args) {
+      let table = this.tables.get(arg.name)
+      for (let id of entities) {
+        let data = table.entities.get(id)
+        if (data) {
+          let contents = output.get(id)
+          if (contents == null) {
+            contents = []
+          }
+          contents[index] = data.data
+          output.set(id, contents)
+        }
+      }
+      index = index + 1
+    }
+
+    return output
   }
 }

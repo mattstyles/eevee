@@ -65,7 +65,7 @@ it('World can apply components to entities and set the bitmask correctly', () =>
   expect((entityMask & 4) > 0).toBe(false)
 })
 
-it('World can get queries for entities that match the component set', () => {
+it('World can be queried for entities that contain a component', () => {
   const world = new World()
   const entity = world.createEntity()
   const testString = 'hello'
@@ -77,9 +77,40 @@ it('World can get queries for entities that match the component set', () => {
   world.applyComponent(new ITestComponent(testString), entity)
   world.applyComponent(new ITestComponent2(testNumber), entity)
 
-  const entities = world.query<ITestComponent>(ITestComponent)
+  const entities = world.queryOne<ITestComponent>(ITestComponent)
 
-  for (let [data, id] of entities) {
+  let count = 0
+  for (let [id, [data]] of entities) {
+    count = count + 1
     expect(data).toBe(testString)
+    expect(id).toBe(entity)
   }
+  expect(count).toBe(1)
+})
+
+it('World can be queried for entities that match the component set', () => {
+  const world = new World()
+  const entity = world.createEntity()
+  const testString = 'hello'
+  const testNumber = 42
+
+  world.register(ITestComponent)
+  world.register(ITestComponent2)
+
+  world.applyComponent(new ITestComponent(testString), entity)
+  world.applyComponent(new ITestComponent2(testNumber), entity)
+
+  const entities = world.query<ITestComponent, ITestComponent2>(
+    ITestComponent,
+    ITestComponent2
+  )
+
+  let count = 0
+  for (let [id, [str, num]] of entities) {
+    count = count + 1
+    expect(str).toBe(testString)
+    expect(num).toBe(testNumber)
+    expect(id).toBe(entity)
+  }
+  expect(count).toBe(1)
 })
