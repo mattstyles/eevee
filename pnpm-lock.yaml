@@ -26,6 +26,7 @@ importers:
       '@swc/core': ^1.2.111
       '@swc/jest': ^0.2.8
       '@types/jest': ^27.0.3
+      '@types/uuid': ^8.3.3
       concurrently: ^6.4.0
       jest: ^27.3.1
       rimraf: ^3.0.2
@@ -38,6 +39,7 @@ importers:
       '@swc/core': 1.2.111
       '@swc/jest': 0.2.8_@swc+core@1.2.111
       '@types/jest': 27.0.3
+      '@types/uuid': 8.3.3
       concurrently: 6.4.0
       jest: 27.3.1
       rimraf: 3.0.2
@@ -1196,6 +1198,10 @@ packages:
 
   /@types/stack-utils/2.0.1:
     resolution: {integrity: sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==}
+    dev: true
+
+  /@types/uuid/8.3.3:
+    resolution: {integrity: sha512-0LbEEx1zxrYB3pgpd1M5lEhLcXjKJnYghvhTRgaBeUivLHMDM1TzF3IJ6hXU2+8uA4Xz+5BA63mtZo5DjVT8iA==}
     dev: true
 
   /@types/yargs-parser/20.2.1:

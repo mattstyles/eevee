@@ -2,18 +2,18 @@ import {v4 as uuid} from 'uuid'
 
 type ID = string
 
-export class Component {
+export abstract class Component {
   id: ID
   data: any = {}
   onAdd(): void {}
   onRemove(): void {}
 
-  constructor(attributes: object = {}) {
+  constructor(attributes: Record<string, any> = {}) {
     this.data = attributes
   }
 }
 
-type TableEntityData = Map<ID, any>
+type TableEntityData = Map<ID, Component>
 
 type TableData = {
   entities: TableEntityData
