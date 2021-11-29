@@ -30,6 +30,42 @@ export class World {
   // Available masks
   masks: Map<number, boolean> = new Map()
 
+  // Query cache
+  cache: Map<string, TableEntityData> = new Map()
+
+  /**
+   * Returns the cached result if it exists
+   */
+  getCache<
+    A = Component,
+    B = Component,
+    C = Component,
+    D = Component,
+    E = Component,
+    F = Component,
+    G = Component,
+    H = Component,
+    I = Component,
+    J = Component,
+    K = Component,
+    L = Component
+  >(key: Array<string>): Map<ID, [A, B, C, D, E, F, G, H, I, J, K, L]> | null {
+    const cached: unknown = this.cache.get(key.join(','))
+
+    if (cached == null) {
+      return null
+    }
+
+    return cached as Map<ID, [A, B, C, D, E, F, G, H, I, J, K, L]>
+  }
+
+  /**
+   * Sets the cache key based on the list of components used for the query
+   */
+  setCache(key: Array<string>, data: Map<ID, unknown>) {
+    this.cache.set(key.join(','), data as TableEntityData)
+  }
+
   /**
    * Creates a new entity and adds it to the world
    */
@@ -72,6 +108,8 @@ export class World {
 
     table.entities.set(entity, component)
     this.entities.set(entity, currentMask | table.mask)
+
+    // @TODO invalidate the cache
   }
 
   /**
@@ -80,17 +118,25 @@ export class World {
   queryOne<T extends Component = Component>(
     component: typeof Component
   ): Map<ID, [T['data']]> {
+    const cached: unknown = this.getCache<T>([component.name])
+    if (cached != null) {
+      return cached as Map<ID, [T['data']]>
+    }
+
     const table = this.tables.get(component.name)
     const components = new Map<ID, [T['data']]>()
     table.entities.forEach((component, key) => {
       components.set(key, [component.data as T['data']])
     })
+
+    this.setCache([component.name], components)
     return components
   }
 
   /**
    * Returns data from entities who match the supplied components
-   * @TODO cache the result
+   *
+   * Should we implement per query caching? Returning an object to cache and run the query?
    */
   query<
     A extends Component = Component,
@@ -124,6 +170,33 @@ export class World {
       L['data']?
     ]
   > {
+    if (args.length === 1) {
+      return this.queryOne<A>(args[0])
+    }
+
+    const cached: unknown = this.getCache<A, B, C, D, E, F, G, H, I, J, K, L>(
+      args.map((arg) => arg.name)
+    )
+    if (cached != null) {
+      return cached as Map<
+        ID,
+        [
+          A['data']?,
+          B['data']?,
+          C['data']?,
+          D['data']?,
+          E['data']?,
+          F['data']?,
+          G['data']?,
+          H['data']?,
+          I['data']?,
+          J['data']?,
+          K['data']?,
+          L['data']?
+        ]
+      >
+    }
+
     // Generate a bitmask from the supplied component types
     const allMasks = []
     for (let arg of args) {
@@ -163,6 +236,10 @@ export class World {
       index = index + 1
     }
 
+    this.setCache(
+      args.map((arg) => arg.name),
+      output
+    )
     return output
   }
 }
