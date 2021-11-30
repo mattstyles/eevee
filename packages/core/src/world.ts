@@ -1,4 +1,5 @@
 import {v4 as uuid} from 'uuid'
+import keyIncludes from './keyIncludes'
 
 type ID = string
 
@@ -62,8 +63,26 @@ export class World {
   /**
    * Sets the cache key based on the list of components used for the query
    */
-  setCache(key: Array<string>, data: Map<ID, unknown>) {
+  setCache(key: Array<string>, data: Map<ID, unknown>): void {
     this.cache.set(key.join(','), data as TableEntityData)
+  }
+
+  /**
+   * Deletes a key from the cache
+   */
+  deleteCache(key: Array<string>): void {
+    this.cache.delete(key.join(','))
+  }
+
+  /**
+   * Iterates the cache looking for items that contain the passed component
+   */
+  invalidateCache(key: string): void {
+    for (let [cacheKey] of this.cache) {
+      if (keyIncludes(key, cacheKey)) {
+        this.deleteCache([cacheKey])
+      }
+    }
   }
 
   /**
@@ -109,7 +128,8 @@ export class World {
     table.entities.set(entity, component)
     this.entities.set(entity, currentMask | table.mask)
 
-    // @TODO invalidate the cache
+    // Invalidate where component is a part of the cache
+    this.invalidateCache(component.constructor.name)
   }
 
   /**
