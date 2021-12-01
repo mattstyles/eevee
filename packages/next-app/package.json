@@ -8,7 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@eevee/core": "workspace:^1.0.0",
+    "@eevee/core": "workspace:^0.0.0",
     "next": "12.0.4",
     "react": "17.0.2",
     "react-dom": "17.0.2"

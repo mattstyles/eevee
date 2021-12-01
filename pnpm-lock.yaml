@@ -7,7 +7,7 @@ importers:
 
   packages/app:
     specifiers:
-      '@eevee/core': workspace:^1.0.0
+      '@eevee/core': workspace:^0.0.0
       '@swc/cli': ^0.1.51
       '@swc/core': ^1.2.111
       chokidar: ^3.5.2
@@ -49,27 +49,27 @@ importers:
     specifiers:
       '@swc/cli': ^0.1.51
       '@swc/core': ^1.2.111
-      chokidar: ^3.5.2
-      typescript: ^4.5.2
-    devDependencies:
-      '@swc/cli': 0.1.51_@swc+core@1.2.111+chokidar@3.5.2
-      '@swc/core': 1.2.111
-      chokidar: 3.5.2
-      typescript: 4.5.2
-
-  packages/eevee:
-    specifiers:
-      '@swc/cli': ^0.1.51
-      '@swc/core': ^1.2.111
+      '@swc/jest': ^0.2.8
+      '@types/jest': ^27.0.3
+      '@types/uuid': ^8.3.3
+      concurrently: ^6.4.0
+      jest: ^27.3.1
+      rimraf: ^3.0.2
       typescript: ^4.5.2
     devDependencies:
       '@swc/cli': 0.1.51_@swc+core@1.2.111
       '@swc/core': 1.2.111
+      '@swc/jest': 0.2.8_@swc+core@1.2.111
+      '@types/jest': 27.0.3
+      '@types/uuid': 8.3.3
+      concurrently: 6.4.0
+      jest: 27.3.1
+      rimraf: 3.0.2
       typescript: 4.5.2
 
   packages/next-app:
     specifiers:
-      '@eevee/core': workspace:^1.0.0
+      '@eevee/core': workspace:^0.0.0
       '@types/node': 16.11.10
       '@types/react': 17.0.36
       eslint: 7.32.0

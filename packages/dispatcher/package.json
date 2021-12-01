@@ -2,12 +2,13 @@
   "name": "@eevee/dispatcher",
   "version": "0.0.0",
   "description": "Dispatch system for eevee ECS",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
-    "build": "swc src/index.ts -d lib",
-    "build:watch": "swc -w src/index.ts -d lib",
-    "types": "tsc src/index.ts -d --emitDeclarationOnly --outDir lib",
-    "types:watch": "tsc -w src/index.ts -d --emitDeclarationOnly --outDir lib",
+    "build": "NODE_ENV=production rimraf lib && swc src -d lib",
+    "build:watch": "swc -w src -d lib",
+    "types": "tsc src -d --emitDeclarationOnly --outDir lib",
+    "types:watch": "tsc -w src -d --emitDeclarationOnly --outDir lib",
     "test": "jest",
     "test:watch": "jest --watch",
     "watch": "concurrently --kill-others \"pnpm run build:watch\" \"pnpm run types:watch\" \"pnpm run test:watch\""
@@ -17,7 +18,12 @@
   "devDependencies": {
     "@swc/cli": "^0.1.51",
     "@swc/core": "^1.2.111",
-    "chokidar": "^3.5.2",
+    "@swc/jest": "^0.2.8",
+    "@types/jest": "^27.0.3",
+    "@types/uuid": "^8.3.3",
+    "concurrently": "^6.4.0",
+    "jest": "^27.3.1",
+    "rimraf": "^3.0.2",
     "typescript": "^4.5.2"
   }
 }

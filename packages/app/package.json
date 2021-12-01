@@ -19,6 +19,6 @@
     "rimraf": "^3.0.2"
   },
   "dependencies": {
-    "@eevee/core": "workspace:^1.0.0"
+    "@eevee/core": "workspace:^0.0.0"
   }
 }
