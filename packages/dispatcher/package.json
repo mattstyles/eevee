@@ -7,8 +7,8 @@
   "scripts": {
     "build": "NODE_ENV=production rimraf lib && swc src -d lib",
     "build:watch": "swc -w src -d lib",
-    "types": "tsc src -d --emitDeclarationOnly --outDir lib",
-    "types:watch": "tsc -w src -d --emitDeclarationOnly --outDir lib",
+    "types": "tsc --build tsconfig.build.json",
+    "types:watch": "tsc -w --build tsconfig.build.json",
     "test": "jest",
     "test:watch": "jest --watch",
     "watch": "concurrently --kill-others \"pnpm run build:watch\" \"pnpm run types:watch\" \"pnpm run test:watch\""
@@ -25,5 +25,8 @@
     "jest": "^27.3.1",
     "rimraf": "^3.0.2",
     "typescript": "^4.5.2"
+  },
+  "dependencies": {
+    "@eevee/core": "workspace:^0.0.0"
   }
 }

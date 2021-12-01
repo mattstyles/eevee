@@ -2,7 +2,9 @@
   "compilerOptions": {
     "target": "es6",
     "moduleResolution": "node",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "declaration": true,
+    "downlevelIteration": true
   },
   "exclude": ["node_modules", "**/*/lib", "**/*/dist"]
 }

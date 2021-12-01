@@ -1,4 +1,5 @@
-import {World, Component} from './world'
+import {World} from './world'
+import {Component} from './component'
 
 class ITestComponent extends Component {
   id = 'TestComponent'

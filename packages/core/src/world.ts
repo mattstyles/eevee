@@ -1,18 +1,8 @@
 import {v4 as uuid} from 'uuid'
 import keyIncludes from './keyIncludes'
 
-type ID = string
-
-export abstract class Component {
-  id: ID
-  data: any = {}
-  onAdd(): void {}
-  onRemove(): void {}
-
-  constructor(attributes: Record<string, any> = {}) {
-    this.data = attributes
-  }
-}
+import type {ID} from './entity'
+import {Component} from './component'
 
 type TableEntityData = Map<ID, Component>
 
