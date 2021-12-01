@@ -56,7 +56,7 @@ export default class PriorityQueue<T> {
     }
   }
 
-  forEach(cb: (T) => void): void {
+  forEach(cb: (arg: T) => void): void {
     let curr = this.head
     while (curr != null) {
       cb(curr.data)
