@@ -77,6 +77,19 @@ it('World can remove components from entities ans sets bitmask correctly', () =>
   expect((entityMask & 2) > 0).toBe(false)
 })
 
+it('World can have resources added and removed from it', () => {
+  const world = new World()
+  const resource = {foo: 'bar'}
+  const resourceID = 'resource'
+
+  world.addResource(resourceID, resource)
+  expect(world.resources.size).toBe(1)
+  expect(world.resources.get(resourceID)).toBe(resource)
+
+  world.removeResource(resourceID)
+  expect(world.resources.size).toBe(0)
+})
+
 it('World can be queried for entities that contain a component', () => {
   const world = new World()
   const entity = world.createEntity()

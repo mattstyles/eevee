@@ -28,6 +28,9 @@ export class World {
   // Emitter
   events: EventEmitter = new EventEmitter()
 
+  // World resources
+  resources: Map<ID, any> = new Map()
+
   /**
    * Returns the cached result if it exists
    */
@@ -77,6 +80,20 @@ export class World {
         this.deleteCache([cacheKey])
       }
     }
+  }
+
+  /**
+   * Adds a resource to the world
+   */
+  addResource(name: string, resource: any) {
+    this.resources.set(name, resource)
+  }
+
+  /**
+   * Removes a resource to the world
+   */
+  removeResource(name: string) {
+    this.resources.delete(name)
   }
 
   /**
