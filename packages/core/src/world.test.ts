@@ -56,6 +56,27 @@ it('World can apply components to entities and set the bitmask correctly', () =>
   expect((entityMask & 4) > 0).toBe(false)
 })
 
+it('World can remove components from entities ans sets bitmask correctly', () => {
+  const world = new World()
+  const entity = world.createEntity()
+
+  world.register(ITestComponent)
+  world.register(ITestComponent2)
+
+  world.applyComponent(new ITestComponent({str: 'yo'}), entity)
+  world.applyComponent(new ITestComponent2({num: 42}), entity)
+
+  let entityMask = world.entities.get(entity)
+  expect((entityMask & 1) > 0).toBe(true)
+  expect((entityMask & 2) > 0).toBe(true)
+  expect((entityMask & (1 | 2)) > 0).toBe(true)
+
+  world.removeComponent(ITestComponent2, entity)
+  entityMask = world.entities.get(entity)
+  expect((entityMask & 1) > 0).toBe(true)
+  expect((entityMask & 2) > 0).toBe(false)
+})
+
 it('World can be queried for entities that contain a component', () => {
   const world = new World()
   const entity = world.createEntity()

@@ -120,6 +120,27 @@ export class World {
 
     // Invalidate where component is a part of the cache
     this.invalidateCache(component.constructor.name)
+
+    return true
+  }
+
+  /**
+   * Removes a component instance from an entity
+   */
+  removeComponent(component: typeof Component, entity: ID) {
+    const table = this.tables.get(component.name)
+    const currentMask = this.entities.get(entity)
+
+    if (table == null || currentMask == null) {
+      return false
+    }
+
+    this.entities.delete(entity)
+    this.entities.set(entity, currentMask ^ table.mask)
+
+    this.invalidateCache(component.name)
+
+    return true
   }
 
   /**
