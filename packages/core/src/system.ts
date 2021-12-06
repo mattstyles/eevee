@@ -1,5 +1,6 @@
 import type {ID} from './entity'
 import {Component} from './component'
+import {World} from './world'
 
 export abstract class System<
   A extends Component = Component,
@@ -34,6 +35,7 @@ export abstract class System<
         K['data']?,
         L['data']?
       ]
-    >
+    >,
+    world: World
   ): void {}
 }

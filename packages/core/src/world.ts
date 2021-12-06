@@ -1,6 +1,7 @@
 import {v4 as uuid} from 'uuid'
-import keyIncludes from './keyIncludes'
+import EventEmitter from 'eventemitter3'
 
+import keyIncludes from './keyIncludes'
 import type {ID} from './entity'
 import {Component} from './component'
 
@@ -23,6 +24,9 @@ export class World {
 
   // Query cache
   cache: Map<string, TableEntityData> = new Map()
+
+  // Emitter
+  events: EventEmitter = new EventEmitter()
 
   /**
    * Returns the cached result if it exists

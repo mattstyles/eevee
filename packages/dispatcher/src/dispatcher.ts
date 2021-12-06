@@ -20,7 +20,7 @@ export class Dispatcher {
   dispatch(world: World) {
     this.systems.forEach((system) => {
       const entities = world.query(...system.dependencies)
-      system.run(entities)
+      system.run(entities, world)
     })
   }
 }
