@@ -1,5 +1,5 @@
 {
-  "name": "eevee-dispatcher",
+  "name": "eev-dispatcher",
   "version": "0.0.1",
   "description": "Dispatch system for eevee ECS",
   "main": "lib/index.js",
@@ -27,6 +27,6 @@
     "typescript": "^4.5.2"
   },
   "dependencies": {
-    "eevee-core": "workspace:^0.0.0"
+    "eev-core": "workspace:^0.0.0"
   }
 }
