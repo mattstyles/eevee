@@ -1,5 +1,5 @@
 {
-  "name": "@eevee/core",
+  "name": "eevee-core",
   "version": "0.0.1",
   "description": "Eevee ECS core module",
   "main": "lib/index.js",

@@ -1,5 +1,5 @@
 {
-  "name": "@eevee/dispatcher",
+  "name": "eevee-dispatcher",
   "version": "0.0.1",
   "description": "Dispatch system for eevee ECS",
   "main": "lib/index.js",
