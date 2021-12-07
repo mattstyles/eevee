@@ -1,6 +1,6 @@
 {
   "name": "@eevee/dispatcher",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Dispatch system for eevee ECS",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
