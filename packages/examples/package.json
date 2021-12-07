@@ -1,0 +1,21 @@
+{
+  "name": "examples",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel index.html"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.0.1"
+  },
+  "dependencies": {
+    "eev-core": "workspace:^0.0.1",
+    "eev-dispatcher": "workspace:^0.0.1",
+    "just-clamp": "^4.0.1",
+    "just-random-integer": "^3.0.1"
+  }
+}

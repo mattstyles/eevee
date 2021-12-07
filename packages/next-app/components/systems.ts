@@ -1,5 +1,5 @@
-import type {ID} from '@eevee/core'
-import {System} from '@eevee/core'
+import type {ID} from 'eev-core'
+import {System} from 'eev-core'
 import randomInt from 'just-random-integer'
 
 import {Position, Colour, Grow} from './components'

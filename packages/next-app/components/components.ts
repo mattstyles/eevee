@@ -1,4 +1,4 @@
-import {Component} from '@eevee/core'
+import {Component} from 'eev-core'
 
 export class Position extends Component {
   id = 'PositionComponent'

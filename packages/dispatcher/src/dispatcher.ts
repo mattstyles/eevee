@@ -1,4 +1,4 @@
-import {World, System} from '@eevee/core'
+import {World, System} from 'eev-core'
 import PriorityQueue from './queue'
 
 type DispatcherRegisterOptions = {

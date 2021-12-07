@@ -8,8 +8,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@eevee/core": "workspace:^0.0.0",
-    "@eevee/dispatcher": "workspace:^0.0.0",
+    "eev-core": "workspace:^0.0.1",
+    "eev-dispatcher": "workspace:^0.0.1",
     "eventemitter3": "^4.0.7",
     "just-random-integer": "^3.0.1",
     "next": "12.0.4",

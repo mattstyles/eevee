@@ -106,6 +106,17 @@ export class World {
   }
 
   /**
+   * Removes an entity from the world
+   */
+  removeEntity(id: ID): void {
+    // @TODO get entity bitmask
+    // @TODO for each bit set get the corresponding table and delete component
+    // @TODO invalidate cache for that table
+    // @TODO delete entity from map
+    // @TODO what happens if entities share components? they probably should not but nothing actively stops them currently.
+  }
+
+  /**
    * Registers a component type with the world
    */
   register(component: typeof Component): void {

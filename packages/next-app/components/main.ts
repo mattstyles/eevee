@@ -1,5 +1,5 @@
-import {World, Component, System} from '@eevee/core'
-import {Dispatcher} from '@eevee/dispatcher'
+import {World, Component, System} from 'eev-core'
+import {Dispatcher} from 'eev-dispatcher'
 
 import emitter from './emitter'
 import {setCanvas, getContext} from './canvas'

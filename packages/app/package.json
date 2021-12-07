@@ -7,8 +7,10 @@
   "scripts": {
     "prebuild": "rimraf lib",
     "build": "rimraf lib && spack",
-    "watch": "spack -w",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "chokidar \"src/**/*.ts\" -c \"spack\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "launch": "hench index.html",
+    "dev": "concurrently --kill-others \"pnpm run watch\" \"pnpm run launch\""
   },
   "author": "",
   "license": "ISC",
@@ -16,9 +18,13 @@
     "@swc/cli": "^0.1.51",
     "@swc/core": "^1.2.111",
     "chokidar": "^3.5.2",
+    "chokidar-cli": "^3.0.0",
+    "concurrently": "^6.4.0",
+    "hench": "^1.1.0",
     "rimraf": "^3.0.2"
   },
   "dependencies": {
-    "@eevee/core": "workspace:^0.0.0"
+    "eev-core": "workspace:*",
+    "eev-dispatcher": "workspace:*"
   }
 }

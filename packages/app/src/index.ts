@@ -1,4 +1,5 @@
-import { say } from '@eevee/core'
-import { id } from './common'
+import {World} from 'eev-core'
+import {id} from './common'
 
-say(id)
+const world = new World()
+console.log('hello world')

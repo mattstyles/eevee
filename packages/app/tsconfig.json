@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "emitDeclarationOnly": true,
+    "esModuleInterop": true,
+    "outDir": "./lib"
+  },
+  "include": ["./src", "__tests__/**/**.ts"]
+}
