@@ -108,12 +108,22 @@ export class World {
   /**
    * Removes an entity from the world
    */
-  removeEntity(id: ID): void {
-    // @TODO get entity bitmask
-    // @TODO for each bit set get the corresponding table and delete component
-    // @TODO invalidate cache for that table
-    // @TODO delete entity from map
+  removeEntity(entity: ID): void {
     // @TODO what happens if entities share components? they probably should not but nothing actively stops them currently.
+
+    const mask = this.entities.get(entity)
+
+    for (let [name, table] of this.tables) {
+      // If this table is not part of the entity definition then skip
+      if (!(table.mask & mask)) {
+        continue
+      }
+
+      table.entities.delete(entity)
+      this.invalidateCache(name)
+    }
+
+    this.entities.delete(entity)
   }
 
   /**

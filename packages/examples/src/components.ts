@@ -9,3 +9,13 @@ export class Position extends Component {
     this.data = attributes
   }
 }
+
+export class Decay extends Component {
+  id = 'DecayComponent'
+  data: {life: number; decay: number} = {life: 1, decay: 0.5}
+
+  constructor(attributes: {life: number; decay: number}) {
+    super(attributes)
+    this.data = attributes
+  }
+}

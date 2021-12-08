@@ -56,7 +56,7 @@ it('World can apply components to entities and set the bitmask correctly', () =>
   expect((entityMask & 4) > 0).toBe(false)
 })
 
-it('World can remove components from entities ans sets bitmask correctly', () => {
+it('World can remove components from entities and sets bitmask correctly', () => {
   const world = new World()
   const entity = world.createEntity()
 
@@ -75,6 +75,61 @@ it('World can remove components from entities ans sets bitmask correctly', () =>
   entityMask = world.entities.get(entity)
   expect((entityMask & 1) > 0).toBe(true)
   expect((entityMask & 2) > 0).toBe(false)
+})
+
+it('World can remove entities and their components correctly', () => {
+  const world = new World()
+  const entity = world.createEntity()
+
+  world.register(ITestComponent)
+
+  world.applyComponent(new ITestComponent({str: 'yo'}), entity)
+
+  expect(world.entities.size).toBe(1)
+  expect(world.tables.size).toBe(1)
+  let table = world.tables.get(ITestComponent.name)
+  expect(table.entities.size).toBe(1)
+
+  world.removeEntity(entity)
+  expect(world.entities.size).toBe(0)
+  expect(table.entities.size).toBe(0)
+})
+
+it('Removing entities leaves other tables intact', () => {
+  const world = new World()
+  const entity = world.createEntity()
+  const entity2 = world.createEntity()
+
+  world.register(ITestComponent)
+  world.register(ITestComponent2)
+
+  world.applyComponent(new ITestComponent({str: 'yo'}), entity)
+  world.applyComponent(new ITestComponent2({num: 42}), entity2)
+
+  expect(world.entities.size).toBe(2)
+
+  world.removeEntity(entity)
+
+  expect(world.entities.size).toBe(1)
+  expect(world.tables.get(ITestComponent.name).entities.size).toBe(0)
+  expect(world.tables.get(ITestComponent2.name).entities.size).toBe(1)
+})
+
+it('Removing entities should invalidate the cache', () => {
+  const world = new World()
+  const entity = world.createEntity()
+
+  world.register(ITestComponent)
+
+  world.applyComponent(new ITestComponent({str: 'yo'}), entity)
+
+  let entities = world.query(ITestComponent)
+  expect(entities.size).toBe(1)
+  expect(entities.has(entity)).toBe(true)
+
+  world.removeEntity(entity)
+  entities = world.query(ITestComponent)
+  expect(entities.size).toBe(0)
 })
 
 it('World can have resources added and removed from it', () => {
