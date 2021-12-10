@@ -16,6 +16,7 @@
     "eev-core": "workspace:^0.0.1",
     "eev-dispatcher": "workspace:^0.0.1",
     "just-clamp": "^4.0.1",
-    "just-random-integer": "^3.0.1"
+    "just-random-integer": "^3.0.1",
+    "stats.js": "^0.17.0"
   }
 }

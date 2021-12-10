@@ -90,6 +90,13 @@ export class World {
   }
 
   /**
+   * Gets a resource
+   */
+  getResource(name: string): any {
+    return this.resources.get(name)
+  }
+
+  /**
    * Removes a resource to the world
    */
   removeResource(name: string) {

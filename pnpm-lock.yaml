@@ -87,11 +87,13 @@ importers:
       just-clamp: ^4.0.1
       just-random-integer: ^3.0.1
       parcel: ^2.0.1
+      stats.js: ^0.17.0
     dependencies:
       eev-core: link:../core
       eev-dispatcher: link:../dispatcher
       just-clamp: 4.0.1
       just-random-integer: 3.0.1
+      stats.js: 0.17.0
     devDependencies:
       parcel: 2.0.1
 
@@ -7834,6 +7836,10 @@ packages:
     engines: {node: '>=6'}
     dependencies:
       type-fest: 0.7.1
+    dev: false
+
+  /stats.js/0.17.0:
+    resolution: {integrity: sha1-scPcRtlEmLV4t/05hbgaznExzH0=}
     dev: false
 
   /statuses/1.5.0:
