@@ -92,7 +92,7 @@ export class World {
   /**
    * Gets a resource
    */
-  getResource(name: string): any {
+  getResource<T = unknown>(name: string): T {
     return this.resources.get(name)
   }
 

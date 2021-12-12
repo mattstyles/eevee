@@ -13,8 +13,11 @@ export class Renderer extends System<Position, Decay> {
     this.ctx = ctx
   }
 
-  run(entities: Map<ID, [Position['data'], Decay['data']]>, world) {
-    const {x: width, y: height} = world.getResource('cellSize')
+  run(entities: Map<ID, [Position['data'], Decay['data']]>, world: World) {
+    const {x: width, y: height} = world.getResource<{x: number; y: number}>(
+      'cellSize'
+    )
+
     for (let [_, [{x, y}, {life}]] of entities) {
       // We should clamp based on max life etc but we'll predicate that life is always 0-7
       const alpha = (life * 2).toString(16)
@@ -29,7 +32,7 @@ export class Tick extends System<Position> {
   dependencies = [Position]
 
   run(entities: Map<ID, [Position['data']]>, world: World) {
-    for (let [id, [{x, y}]] of entities) {
+    for (let [_, [{x, y}]] of entities) {
       if (Math.random() > 0.85 && world.entities.size < 25000) {
         world.events.emit('add', {x, y})
       }
