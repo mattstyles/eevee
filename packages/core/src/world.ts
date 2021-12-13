@@ -292,7 +292,7 @@ export class World {
     // Iterate entities looking for those who match the mask
     let entities = new Set<ID>()
     for (let [entity, entityMask] of this.entities) {
-      if (entityMask & mask) {
+      if ((entityMask & mask) === mask) {
         entities.add(entity)
       }
     }

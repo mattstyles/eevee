@@ -195,6 +195,36 @@ it('World can be queried for entities that match the component set', () => {
   expect(count).toBe(1)
 })
 
+it('World queries return components that match all the dependencies', () => {
+  const world = new World()
+  const entity = world.createEntity()
+  const testString = 'hello'
+  const testNumber = 42
+
+  world.register(ITestComponent)
+  world.register(ITestComponent2)
+
+  world.applyComponent(new ITestComponent({str: testString}), entity)
+  world.applyComponent(new ITestComponent2({num: testNumber}), entity)
+
+  const entity2 = world.createEntity()
+  world.applyComponent(new ITestComponent({str: testString}), entity2)
+
+  const entities = world.query<ITestComponent, ITestComponent2>(
+    ITestComponent,
+    ITestComponent2
+  )
+
+  let count = 0
+  for (let [id, [{str}, {num}]] of entities) {
+    count = count + 1
+    expect(str).toBe(testString)
+    expect(num).toBe(testNumber)
+    expect(id).toBe(entity)
+  }
+  expect(count).toBe(1)
+})
+
 it('World queries will use the cache', () => {
   const world = new World()
   const entity = world.createEntity()
