@@ -56,6 +56,37 @@ export default class PriorityQueue<T> {
     }
   }
 
+  remove(data: T): boolean {
+    let curr = this.head
+
+    // Empty list
+    if (curr == null) {
+      return false
+    }
+
+    // Head node
+    if (curr.data === data) {
+      this.head = curr.next
+      delete curr.data
+      return true
+    }
+
+    let prev = curr
+    while (curr.next != null) {
+      curr = curr.next
+
+      if (curr.data === data) {
+        prev.next = curr.next
+        delete curr.data
+        return true
+      }
+
+      prev = curr
+    }
+
+    return false
+  }
+
   forEach(cb: (arg: T) => void): void {
     let curr = this.head
     while (curr != null) {
